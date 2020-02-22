@@ -20,6 +20,7 @@ const Module = require('./Module');
 const ModuleCache = require('./ModuleCache');
 
 const ci = require('ci-info');
+const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
