@@ -97,8 +97,6 @@ function resolve(
 
   const dirPaths = [];
 
-  const dirPaths = [];
-
   if (!originModulePath.startsWith(context.projectRoot)) {
     dirPaths.push(context.projectRoot + '/node_modules/' + moduleName)
   }
