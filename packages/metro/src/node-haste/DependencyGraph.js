@@ -211,7 +211,16 @@ class DependencyGraph extends EventEmitter {
     // been talking about for stuff like CSS or WASM).
 
     const resolvedPath = fs.realpathSync(containerName);
-    const sha1 = this._hasteFS.getSha1(resolvedPath);
+
+    let sha1;
+    if (filename.endsWith('.rb') || filename.endsWith('opal/corelib/runtime.js')) {
+      let source = fs.readFileSync(filename, { encoding: 'utf-8', flag: 'r' });
+      let hash = crypto.createHash('sha1');
+      hash.update(source, 'utf-8');
+      sha1 = hash.digest('utf-8');
+    } else {
+      sha1 = this._hasteFS.getSha1(resolvedPath);
+    }
 
     if (!sha1) {
       throw new ReferenceError(
